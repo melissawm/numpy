@@ -418,6 +418,7 @@ Click on the 'Admin' button, and add anyone else to the repo as a
 collaborator:
 
    .. image:: pull_button.png
+     :alt: <Alternative text here>
 
 Now all those people can do::
 

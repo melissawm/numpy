@@ -1251,6 +1251,7 @@ how to use boolean indexing to generate an image of the `Mandelbrot
 set <https://en.wikipedia.org/wiki/Mandelbrot_set>`__:
 
 .. plot::
+  :alt: <Alternative text here>
 
     >>> import numpy as np
     >>> import matplotlib.pyplot as plt
@@ -1458,6 +1459,7 @@ that ``pylab.hist`` plots the histogram automatically, while
 ``numpy.histogram`` only generates the data.
 
 .. plot::
+  :alt: <Alternative text here>
 
     >>> import numpy as np
     >>> rg = np.random.default_rng(1)

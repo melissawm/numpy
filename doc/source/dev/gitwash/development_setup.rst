@@ -52,15 +52,17 @@ Create the fork repo
 #. At the upper right of the page, click ``Fork``:
 
    .. image:: forking_button.png
+     :alt: <Alternative text here>
 
    You'll see
 
    .. image:: forking_message.png
+     :alt: <Alternative text here>
 
    and then you'll be taken to the home page of your forked copy:
 
    .. image:: forked_page.png
-
+     :alt: <Alternative text here>
 
 .. _set-up-fork:
 

@@ -206,6 +206,7 @@ to, you can also specify the type of data in your list.
 You can visualize your array this way:
 
 .. image:: images/np_array.png
+  :alt: <Alternative text here>
 
 *Be aware that these visualizations are meant to simplify ideas and give you a basic understanding of NumPy concepts and mechanics. Arrays and array operations are much more complicated than are captured here!*
 
@@ -504,7 +505,7 @@ lists. ::
 You can visualize it this way:
 
 .. image:: images/np_indexing.png
-
+  :alt: <Alternative text here>
 
 You may want to take a section of your array or specific array elements to use
 in further analysis or additional operations. To do that, you'll need to subset,
@@ -728,6 +729,7 @@ for example, that you've created two arrays, one called "data" and one called
 "ones"
 
 .. image:: images/np_array_dataones.png
+  :alt: <Alternative text here>
 
 You can add the arrays together with the plus sign.
 
@@ -739,6 +741,7 @@ You can add the arrays together with the plus sign.
   array([2, 3])
 
 .. image:: images/np_data_plus_ones.png
+  :alt: <Alternative text here>
 
 You can, of course, do more than just addition!
 
@@ -752,6 +755,7 @@ You can, of course, do more than just addition!
   array([1., 1.])
 
 .. image:: images/np_sub_mult_divide.png
+  :alt: <Alternative text here>
 
 Basic operations are simple with NumPy. If you want to find the sum of the
 elements in an array, you'd use ``sum()``. This works for 1D arrays, 2D arrays,
@@ -795,6 +799,7 @@ convert the information to kilometers. You can perform this operation with::
   array([1.6, 3.2])
 
 .. image:: images/np_multiply_broadcasting.png
+  :alt: <Alternative text here>
 
 NumPy understands that the multiplication should happen with each cell. That
 concept is called **broadcasting**. Broadcasting is a mechanism that allows
@@ -826,6 +831,7 @@ deviation, and more. ::
   3.0
 
 .. image:: images/np_aggregation.png
+  :alt: <Alternative text here>
 
 Let's start with this array, called "a" ::
 
@@ -871,6 +877,7 @@ represent them in NumPy. ::
          [5, 6]])
 
 .. image:: images/np_create_matrix.png
+  :alt: <Alternative text here>
 
 Indexing and slicing operations are useful when you're manipulating matrices::
 
@@ -883,6 +890,7 @@ Indexing and slicing operations are useful when you're manipulating matrices::
   array([1, 3])
 
 .. image:: images/np_matrix_indexing.png
+  :alt: <Alternative text here>
 
 You can aggregate matrices the same way you aggregated vectors::
 
@@ -894,6 +902,7 @@ You can aggregate matrices the same way you aggregated vectors::
   21
 
 .. image:: images/np_matrix_aggregation.png
+  :alt: <Alternative text here>
 
 You can aggregate all the values in a matrix and you can aggregate them across
 columns or rows using the ``axis`` parameter::
@@ -904,6 +913,7 @@ columns or rows using the ``axis`` parameter::
   array([2, 4, 6])
 
 .. image:: images/np_matrix_aggregation_row.png
+  :alt: <Alternative text here>
 
 Once you've created your matrices, you can add and multiply them using
 arithmetic operators if you have two matrices that are the same size. ::
@@ -915,6 +925,7 @@ arithmetic operators if you have two matrices that are the same size. ::
          [4, 5]])
 
 .. image:: images/np_matrix_arithmetic.png
+  :alt: <Alternative text here>
 
 You can do these arithmetic operations on matrices of different sizes, but only
 if one matrix has only one column or one row. In this case, NumPy will use its
@@ -928,6 +939,7 @@ broadcast rules for the operation. ::
          [6, 7]])
 
 .. image:: images/np_matrix_broadcasting.png
+  :alt: <Alternative text here>
 
 Be aware that when NumPy prints N-dimensional arrays, the last axis is looped
 over the fastest while the first axis is the slowest. For instance::
@@ -964,6 +976,7 @@ All you need to do is pass in the number of elements you want it to generate::
   array([0.63696169, 0.26978671, 0.04097352])
 
 .. image:: images/np_ones_zeros_random.png
+  :alt: <Alternative text here>
 
 You can also use ``ones()``, ``zeros()``, and ``random()`` to create
 a 2D array if you give them a tuple describing the dimensions of the matrix::
@@ -982,6 +995,7 @@ a 2D array if you give them a tuple describing the dimensions of the matrix::
          [0.72949656, 0.54362499]])  # may vary
 
 .. image:: images/np_ones_zeros_matrix.png
+  :alt: <Alternative text here>
 
 Read more about creating arrays, filled with ``0``'s, ``1``'s, other values or
 uninitialized, at :ref:`array creation routines <routines.array-creation>`.
@@ -1093,6 +1107,7 @@ It's common to need to transpose your matrices. NumPy arrays have the property
 ``T`` that allows you to transpose a matrix.
 
 .. image:: images/np_transposing_reshaping.png
+  :alt: <Alternative text here>
 
 You may also need to switch the dimensions of a matrix. This can happen when,
 for example, you have a model that expects a certain input shape that is
@@ -1108,6 +1123,7 @@ You simply need to pass in the new dimensions that you want for the matrix. ::
          [5, 6]])
 
 .. image:: images/np_reshape.png
+  :alt: <Alternative text here>
 
 You can also use ``.transpose()`` to reverse or change the axes of an array
 according to the values you specify.
@@ -1434,10 +1450,12 @@ For example, this is the mean square error formula (a central formula used in
 supervised machine learning models that deal with regression):
 
 .. image:: images/np_MSE_formula.png
+  :alt: <Alternative text here>
 
 Implementing this formula is simple and straightforward in NumPy:
 
 .. image:: images/np_MSE_implementation.png
+  :alt: <Alternative text here>
 
 What makes this work so well is that ``predictions`` and ``labels`` can contain
 one or a thousand values. They only need to be the same size.
@@ -1445,6 +1463,7 @@ one or a thousand values. They only need to be the same size.
 You can visualize it this way:
 
 .. image:: images/np_mse_viz1.png
+  :alt: <Alternative text here>
 
 In this example, both the predictions and labels vectors contain three values,
 meaning ``n`` has a value of three. After we carry out subtractions the values
@@ -1452,9 +1471,10 @@ in the vector are squared. Then NumPy sums the values, and your result is the
 error value for that prediction and a score for the quality of the model.
 
 .. image:: images/np_mse_viz2.png
+  :alt: <Alternative text here>
 
 .. image:: images/np_MSE_explanation2.png
-
+  :alt: <Alternative text here>
 
 How to save and load NumPy objects
 ----------------------------------
@@ -1566,6 +1586,7 @@ easiest way to do this is to use
    ['SIA' 74000000]]
 
 .. image:: images/np_pandas.png
+  :alt: <Alternative text here>
 
 It's simple to use Pandas in order to export your array as well. If you are new
 to NumPy, you may want to  create a Pandas dataframe from the values in your
@@ -1601,6 +1622,7 @@ And read your CSV with::
   >>> data = pd.read_csv('pd.csv')
 
 .. image:: images/np_readcsv.png
+  :alt: <Alternative text here>
 
 You can also save your array with the NumPy ``savetxt`` method. ::
 
@@ -1653,6 +1675,7 @@ All you need to do to plot your values is run::
 .. plot:: user/plots/matplotlib1.py
    :align: center
    :include-source: 0
+   :alt: <Alternative text here>
 
 For example, you can plot a 1D array like this::
 
@@ -1664,6 +1687,7 @@ For example, you can plot a 1D array like this::
 .. plot:: user/plots/matplotlib2.py
    :align: center
    :include-source: 0
+   :alt: <Alternative text here>
 
 With Matplotlib, you have access to an enormous number of visualization options. ::
 
@@ -1680,6 +1704,7 @@ With Matplotlib, you have access to an enormous number of visualization options.
 .. plot:: user/plots/matplotlib3.py
    :align: center
    :include-source: 0
+   :alt: <Alternative text here>
 
 
 To read more about Matplotlib and what it can do, take a look at
