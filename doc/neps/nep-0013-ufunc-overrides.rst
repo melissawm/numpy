@@ -264,6 +264,7 @@ consider carefully if any surprising behavior results.
    Type casting hierarchy.
 
    .. image:: _static/nep0013_image1.png
+       :alt: <Alternative text here>
 
    The ``__array_ufunc__`` of type A can handle ndarrays returning C,
    B can handle ndarray and D returning B, and C can handle A and B returning C,
@@ -280,6 +281,7 @@ consider carefully if any surprising behavior results.
    One-cycle in the ``__array_ufunc__`` graph.
 
    .. image:: _static/nep0013_image2.png
+       :alt: <Alternative text here>
 
    In this case, the ``__array_ufunc__`` relations have a cycle of length 1,
    and a type casting hierarchy does not exist. Binary operations are not
@@ -290,6 +292,7 @@ consider carefully if any surprising behavior results.
    Longer cycle in the ``__array_ufunc__`` graph.
 
    .. image:: _static/nep0013_image3.png
+       :alt: <Alternative text here>
 
    In this case, the ``__array_ufunc__`` relations have a longer cycle, and a
    type casting hierarchy does not exist. Binary operations are still

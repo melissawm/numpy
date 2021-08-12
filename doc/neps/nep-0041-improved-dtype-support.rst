@@ -468,7 +468,7 @@ however, it highlights that the DType datatype class is the central, necessary
 concept:
 
 .. image:: _static/nep-0041-mindmap.svg
-
+  :alt: <Alternative text here>
 
 First steps directly related to this NEP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -636,6 +636,7 @@ These two options are presented in the following figure and compared to
 similar Python implementation patterns:
 
 .. image:: _static/nep-0041-type-sketch-no-fonts.svg
+  :alt: <Alternative text here>
 
 The difference is in how parameters, such as string length or the datetime
 units (``ms``, ``ns``, ...), and storage options, such as byte-order, are handled.
