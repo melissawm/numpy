@@ -201,6 +201,9 @@ html_theme_options = {
   },
 }
 
+html_sidebars = {
+    "**": ["search-field.html", "sidebar-nav-bs.html"]
+}
 html_title = "%s v%s Manual" % (project, version)
 html_static_path = ['_static']
 html_last_updated_fmt = '%b %d, %Y'
