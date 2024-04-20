@@ -28,7 +28,7 @@ jobs:
 
   clang_sanitizers:
     # To enable this workflow on a fork, comment out:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     steps:

@@ -59,7 +59,7 @@ jobs:
 
   openblas32_stable_nightly:
     # To enable this workflow on a fork, comment out:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     strategy:
@@ -123,7 +123,7 @@ jobs:
 
 
   openblas_no_pkgconfig_fedora:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     container: fedora:39
@@ -159,7 +159,7 @@ jobs:
 
 
   flexiblas_fedora:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     container: fedora:39
@@ -195,7 +195,7 @@ jobs:
 
 
   openblas_cmake:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     name: "OpenBLAS with CMake"
@@ -224,7 +224,7 @@ jobs:
 
  
   netlib-debian:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     name: "Debian libblas/liblapack"
@@ -254,7 +254,7 @@ jobs:
 
 
   netlib-split:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     container: opensuse/tumbleweed
@@ -286,7 +286,7 @@ jobs:
 
 
   mkl:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     name: "MKL (LP64, ILP64, SDL)"
@@ -350,7 +350,7 @@ jobs:
       run: spin test -- numpy/linalg
 
   blis:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     name: "BLIS"
@@ -387,7 +387,7 @@ jobs:
       run: spin test -- numpy/linalg
 
   atlas:
-    if: github.repository == 'numpy/numpy'
+    #if: github.repository == 'numpy/numpy'
     needs: get_commit_message
     runs-on: ubuntu-latest
     name: "ATLAS"
