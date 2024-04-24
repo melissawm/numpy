@@ -74,7 +74,7 @@ jobs:
     - uses: ./.github/meson_actions
 
   pypy:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
@@ -92,7 +92,7 @@ jobs:
     - uses: ./.github/meson_actions
 
   debug:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
@@ -122,7 +122,7 @@ jobs:
 
   full:
     # Build a wheel, install it, then run the full test suite with code coverage
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -158,7 +158,7 @@ jobs:
         # TODO: gcov
 
   benchmark:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
@@ -189,7 +189,7 @@ jobs:
         spin bench --quick
 
   sdist:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
@@ -222,7 +222,7 @@ jobs:
         pytest --pyargs numpy -m "not slow"
 
   array_api_tests:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
@@ -259,7 +259,7 @@ jobs:
         pytest array_api_tests -v -c pytest.ini --ci --max-examples=2 --derandomize --disable-deadline --skips-file ${GITHUB_WORKSPACE}/tools/ci/array-api-skips.txt
 
   custom_checks:
-    needs: [smoke_test, get_commit_message]
+    needs: [get_commit_message, smoke_test]
     runs-on: ubuntu-latest
     if: github.event_name != 'push'
     steps:
