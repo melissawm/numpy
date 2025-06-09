@@ -98,7 +98,7 @@ You may have some reservations about including of ``AVX512`` or
 any other CPU feature and you want to exclude from the dispatched features::
 
     python -m build --wheel -Csetup-args=-Dcpu-dispatch="max -avx512f -avx512cd \
-    -avx512_knl -avx512_knm -avx512_skx -avx512_clx -avx512_cnl -avx512_icl"
+    -avx512_knl -avx512_knm -avx512_skx -avx512_clx -avx512_cnl -avx512_icl -avx512_spr"
 
 .. _opt-supported-features:
 
@@ -234,7 +234,7 @@ The need to align certain CPU features that are assured to be supported by
 successive generations of the same architecture, some cases:
 
 - On ppc64le ``VSX(ISA 2.06)`` and ``VSX2(ISA 2.07)`` both imply one another since the
-  first generation that supports little-endian mode is Power-8`(ISA 2.07)`
+  first generation that supports little-endian mode is ``Power-8(ISA 2.07)``
 - On AArch64 ``NEON NEON_FP16 NEON_VFPV4 ASIMD`` implies each other since they are part of the
   hardware baseline.
 

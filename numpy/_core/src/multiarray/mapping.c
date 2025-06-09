@@ -1969,6 +1969,15 @@ array_assign_subscript(PyArrayObject *self, PyObject *ind, PyObject *op)
     if (tmp_arr && solve_may_share_memory(self, tmp_arr, 1) != 0) {
         Py_SETREF(tmp_arr, (PyArrayObject *)PyArray_NewCopy(tmp_arr, NPY_ANYORDER));
     }
+    for (i = 0; i < index_num; ++i) {
+        if (indices[i].object != NULL && PyArray_Check(indices[i].object) &&
+            solve_may_share_memory(self, (PyArrayObject *)indices[i].object, 1) != 0) {
+                Py_SETREF(indices[i].object, PyArray_Copy((PyArrayObject*)indices[i].object));
+                if (indices[i].object == NULL) {
+                    goto fail;
+                }
+        }
+    }
 
     /*
      * Special case for very simple 1-d fancy indexing, which however
@@ -2695,29 +2704,6 @@ PyArray_MapIterCheckIndices(PyArrayMapIterObject *mit)
     return 0;
 
 indexing_error:
-
-    if (mit->size == 0) {
-        PyObject *err_type = NULL, *err_value = NULL, *err_traceback = NULL;
-        PyErr_Fetch(&err_type, &err_value, &err_traceback);
-        /* 2020-05-27, NumPy 1.20 */
-        if (DEPRECATE(
-                "Out of bound index found. This was previously ignored "
-                "when the indexing result contained no elements. "
-                "In the future the index error will be raised. This error "
-                "occurs either due to an empty slice, or if an array has zero "
-                "elements even before indexing.\n"
-                "(Use `warnings.simplefilter('error')` to turn this "
-                "DeprecationWarning into an error and get more details on "
-                "the invalid index.)") < 0) {
-            npy_PyErr_ChainExceptions(err_type, err_value, err_traceback);
-            return -1;
-        }
-        Py_DECREF(err_type);
-        Py_DECREF(err_value);
-        Py_XDECREF(err_traceback);
-        return 0;
-    }
-
     return -1;
 }
 

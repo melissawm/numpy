@@ -1,20 +1,36 @@
-import warnings
-import sys
-import os
 import itertools
-import pytest
-import weakref
+import os
 import re
+import sys
+import warnings
+import weakref
+
+import pytest
 
 import numpy as np
 import numpy._core._multiarray_umath as ncu
 from numpy.testing import (
-    assert_equal, assert_array_equal, assert_almost_equal,
-    assert_array_almost_equal, assert_array_less, build_err_msg,
-    assert_raises, assert_warns, assert_no_warnings, assert_allclose,
-    assert_approx_equal, assert_array_almost_equal_nulp, assert_array_max_ulp,
-    clear_and_catch_warnings, suppress_warnings, assert_string_equal, assert_,
-    tempdir, temppath, assert_no_gc_cycles, HAS_REFCOUNT
+    HAS_REFCOUNT,
+    assert_,
+    assert_allclose,
+    assert_almost_equal,
+    assert_approx_equal,
+    assert_array_almost_equal,
+    assert_array_almost_equal_nulp,
+    assert_array_equal,
+    assert_array_less,
+    assert_array_max_ulp,
+    assert_equal,
+    assert_no_gc_cycles,
+    assert_no_warnings,
+    assert_raises,
+    assert_string_equal,
+    assert_warns,
+    build_err_msg,
+    clear_and_catch_warnings,
+    suppress_warnings,
+    tempdir,
+    temppath,
 )
 
 
@@ -1526,7 +1542,7 @@ def assert_warn_len_equal(mod, n_in_context):
     num_warns = len(mod_warns)
 
     if 'version' in mod_warns:
-        # Python 3 adds a 'version' entry to the registry,
+        # Python adds a 'version' entry to the registry,
         # do not count it.
         num_warns -= 1
 
@@ -1879,7 +1895,7 @@ class TestAssertNoGcCycles:
                 self.cycle = None
 
                 if ReferenceCycleInDel.make_cycle:
-                    # but create a new one so that the garbage collector has more
+                    # but create a new one so that the garbage collector (GC) has more
                     # work to do.
                     ReferenceCycleInDel()
 
@@ -1891,7 +1907,7 @@ class TestAssertNoGcCycles:
                     assert_no_gc_cycles(lambda: None)
             except AssertionError:
                 # the above test is only necessary if the GC actually tried to free
-                # our object anyway, which python 2.7 does not.
+                # our object anyway.
                 if w() is not None:
                     pytest.skip("GC does not call __del__ on cyclic objects")
                     raise

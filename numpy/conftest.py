@@ -2,16 +2,19 @@
 Pytest configuration and fixtures for the Numpy test suite.
 """
 import os
+import string
 import sys
 import tempfile
-from contextlib import contextmanager
 import warnings
+from contextlib import contextmanager
 
 import hypothesis
 import pytest
-import numpy
 
+import numpy
+import numpy as np
 from numpy._core._multiarray_tests import get_fpu_mode
+from numpy._core.tests._natype import get_stringdtype_dtype, pd_NA
 from numpy.testing._private.utils import NOGIL_BUILD
 
 try:
@@ -99,7 +102,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         tr.line("code that re-enables the GIL should do so in a subprocess.")
         pytest.exit("GIL re-enabled during tests", returncode=1)
 
-#FIXME when yield tests are gone.
+# FIXME when yield tests are gone.
 @pytest.hookimpl()
 def pytest_itemcollected(item):
     """
@@ -130,15 +133,14 @@ def check_fpu_mode(request):
     new_mode = get_fpu_mode()
 
     if old_mode != new_mode:
-        raise AssertionError("FPU precision mode changed from {0:#x} to {1:#x}"
-                             " during the test".format(old_mode, new_mode))
+        raise AssertionError(f"FPU precision mode changed from {old_mode:#x} to "
+                             f"{new_mode:#x} during the test")
 
     collect_result = _collect_results.get(request.node)
     if collect_result is not None:
         old_mode, new_mode = collect_result
-        raise AssertionError("FPU precision mode changed from {0:#x} to {1:#x}"
-                             " when collecting the test".format(old_mode,
-                                                                new_mode))
+        raise AssertionError(f"FPU precision mode changed from {old_mode:#x} to "
+                             f"{new_mode:#x} when collecting the test")
 
 
 @pytest.fixture(autouse=True)
@@ -164,7 +166,6 @@ if HAVE_SCPDT:
                 "msvccompiler",
                 "Deprecated call",
                 "numpy.core",
-                "`np.compat`",
                 "Importing from numpy.matlib",
                 "This function is deprecated.",    # random_integers
                 "Data type alias 'a'",     # numpy.rec.fromfile
@@ -227,7 +228,31 @@ if HAVE_SCPDT:
         'numpy/_core/cversions.py',
         'numpy/_pyinstaller',
         'numpy/random/_examples',
-        'numpy/compat',
         'numpy/f2py/_backends/_distutils.py',
     ]
 
+
+@pytest.fixture
+def random_string_list():
+    chars = list(string.ascii_letters + string.digits)
+    chars = np.array(chars, dtype="U1")
+    ret = np.random.choice(chars, size=100 * 10, replace=True)
+    return ret.view("U100")
+
+
+@pytest.fixture(params=[True, False])
+def coerce(request):
+    return request.param
+
+
+@pytest.fixture(
+    params=["unset", None, pd_NA, np.nan, float("nan"), "__nan__"],
+    ids=["unset", "None", "pandas.NA", "np.nan", "float('nan')", "string nan"],
+)
+def na_object(request):
+    return request.param
+
+
+@pytest.fixture()
+def dtype(na_object, coerce):
+    return get_stringdtype_dtype(na_object, coerce)

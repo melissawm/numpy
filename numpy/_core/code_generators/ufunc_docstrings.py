@@ -50,11 +50,11 @@ def add_newdoc(place, name, doc):
     )
     if name[0] != '_' and name not in skip:
         if '\nx :' in doc:
-            assert '$OUT_SCALAR_1' in doc, "in {}".format(name)
+            assert '$OUT_SCALAR_1' in doc, f"in {name}"
         elif '\nx2 :' in doc or '\nx1, x2 :' in doc:
-            assert '$OUT_SCALAR_2' in doc, "in {}".format(name)
+            assert '$OUT_SCALAR_2' in doc, f"in {name}"
         else:
-            assert False, "Could not detect number of inputs in {}".format(name)
+            assert False, f"Could not detect number of inputs in {name}"
 
     for k, v in subst.items():
         doc = doc.replace('$' + k, v)
@@ -426,10 +426,10 @@ add_newdoc('numpy._core.umath', 'arctan',
 
     Examples
     --------
+
     We expect the arctan of 0 to be 0, and of 1 to be pi/4:
 
     >>> import numpy as np
-
     >>> np.arctan([0, 1])
     array([ 0.        ,  0.78539816])
 
@@ -507,10 +507,10 @@ add_newdoc('numpy._core.umath', 'arctan2',
 
     Examples
     --------
+
     Consider four points in different quadrants:
 
     >>> import numpy as np
-
     >>> x = np.array([-1, +1, +1, -1])
     >>> y = np.array([-1, -1, +1, +1])
     >>> np.arctan2(y, x) * 180 / np.pi
@@ -989,7 +989,6 @@ add_newdoc('numpy._core.umath', 'degrees',
     Convert a radian array to degrees
 
     >>> import numpy as np
-
     >>> rad = np.arange(12.)*np.pi/6
     >>> np.degrees(rad)
     array([   0.,   30.,   60.,   90.,  120.,  150.,  180.,  210.,  240.,
@@ -1224,6 +1223,7 @@ add_newdoc('numpy._core.umath', 'exp',
     >>> import numpy as np
 
     >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
 
     >>> x = np.linspace(-2*np.pi, 2*np.pi, 100)
     >>> xx = x + 1j * x[:, np.newaxis] # a + ib over complex plane
@@ -1298,12 +1298,12 @@ add_newdoc('numpy._core.umath', 'expm1',
 
     Examples
     --------
+
     The true value of ``exp(1e-10) - 1`` is ``1.00000000005e-10`` to
     about 32 significant digits. This example shows the superiority of
     expm1 in this case.
 
     >>> import numpy as np
-
     >>> np.expm1(1e-10)
     1.00000000005e-10
     >>> np.exp(1e-10) - 1
@@ -2830,7 +2830,7 @@ add_newdoc('numpy._core.umath', 'matmul',
       >>> # n is 7, k is 4, m is 3
 
     The matmul function implements the semantics of the ``@`` operator
-    introduced in Python 3.5 following :pep:`465`.
+    defined in :pep:`465`.
 
     It uses an optimized BLAS library when possible (see `numpy.linalg`).
 
@@ -2839,7 +2839,6 @@ add_newdoc('numpy._core.umath', 'matmul',
     For 2-D arrays it is the matrix product:
 
     >>> import numpy as np
-
     >>> a = np.array([[1, 0],
     ...               [0, 1]])
     >>> b = np.array([[4, 1],
@@ -2964,7 +2963,7 @@ add_newdoc('numpy._core.umath', 'matvec',
     matrix-vector product is defined as:
 
     .. math::
-       \\mathbf{A} \\cdot \\mathbf{b} = \\sum_{j=0}^{n-1} A_{ij} v_j
+       \\mathbf{A} \\cdot \\mathbf{v} = \\sum_{j=0}^{n-1} A_{ij} v_j
 
     where the sum is over the last dimensions in ``x1`` and ``x2``
     (unless ``axes`` is specified).  (For a matrix-vector product with the
@@ -3031,7 +3030,7 @@ add_newdoc('numpy._core.umath', 'vecmat',
     vector-matrix product is defined as:
 
     .. math::
-       \\mathbf{b} \\cdot \\mathbf{A} = \\sum_{i=0}^{n-1} \\overline{v_i}A_{ij}
+       \\mathbf{v} \\cdot \\mathbf{A} = \\sum_{i=0}^{n-1} \\overline{v_i}A_{ij}
 
     where the sum is over the last dimension of ``x1`` and the one-but-last
     dimensions in ``x2`` (unless `axes` is specified) and where
@@ -3582,8 +3581,8 @@ add_newdoc('numpy._core.umath', 'remainder',
 
         This should not be confused with:
 
-        * Python 3.7's `math.remainder` and C's ``remainder``, which
-          computes the IEEE remainder, which are the complement to
+        * Python's `math.remainder` and C's ``remainder``, which
+          compute the IEEE remainder, which are the complement to
           ``round(x1 / x2)``.
         * The MATLAB ``rem`` function and or the C ``%`` operator which is the
           complement to ``int(x1 / x2)``.

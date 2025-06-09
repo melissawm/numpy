@@ -4,15 +4,16 @@ by C code.
 These tests complement those found in `test_io.py`.
 """
 
-import sys
 import os
-import pytest
-from tempfile import NamedTemporaryFile, mkstemp
+import sys
 from io import StringIO
+from tempfile import NamedTemporaryFile, mkstemp
+
+import pytest
 
 import numpy as np
 from numpy.ma.testutils import assert_equal
-from numpy.testing import assert_array_equal, HAS_REFCOUNT, IS_PYPY
+from numpy.testing import HAS_REFCOUNT, IS_PYPY, assert_array_equal
 
 
 def test_scientific_notation():
@@ -1073,3 +1074,28 @@ def test_maxrows_exceeding_chunksize(nmax):
     res = np.loadtxt(fname, dtype=str, delimiter=" ", max_rows=nmax)
     os.remove(fname)
     assert len(res) == nmax
+
+@pytest.mark.parametrize("nskip", (0, 10000, 12345, 50000, 67891, 100000))
+def test_skiprow_exceeding_maxrows_exceeding_chunksize(tmpdir, nskip):
+    # tries to read a file in chunks by skipping a variable amount of lines,
+    # less, equal, greater than max_rows
+    file_length = 110000
+    data = "\n".join(f"{i} a 0.5 1" for i in range(1, file_length + 1))
+    expected_length = min(60000, file_length - nskip)
+    expected = np.arange(nskip + 1, nskip + 1 + expected_length).astype(str)
+
+    # file-like path
+    txt = StringIO(data)
+    res = np.loadtxt(txt, dtype='str', delimiter=" ", skiprows=nskip, max_rows=60000)
+    assert len(res) == expected_length
+    # are the right lines read in res?
+    assert_array_equal(expected, res[:, 0])
+
+    # file-obj path
+    tmp_file = tmpdir / "test_data.txt"
+    tmp_file.write(data)
+    fname = str(tmp_file)
+    res = np.loadtxt(fname, dtype='str', delimiter=" ", skiprows=nskip, max_rows=60000)
+    assert len(res) == expected_length
+    # are the right lines read in res?
+    assert_array_equal(expected, res[:, 0])
